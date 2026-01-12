@@ -1,0 +1,24 @@
+trigger: none
+
+pool: new_app
+
+stages:
+ - stage: 
+   jobs:
+     - job: 
+       steps:
+       - task: NodeTool@0
+         inputs:
+           versionSource: 'spec'
+           versionSpec: '16.x'
+       - task: PowerShell@2
+         displayName: npm install
+         inputs:
+           targetType: 'inline'
+           script: 'npm install'
+       - task: PowerShell@2
+         displayName: npm run
+         inputs:
+           targetType: 'inline'
+           script: 'npm run build'
+  
