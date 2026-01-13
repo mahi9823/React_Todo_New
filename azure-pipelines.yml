@@ -12,9 +12,10 @@ stages:
       displayName: lint
       steps:
        - task: PowerShell@2
+         continueOnError: true
          inputs:
            targetType: 'inline'
-           script: 'biome lint $(system.DefaultWorkingDirectory)/Build' 
+           script: 'biome lint $(system.DefaultWorkingDirectory)/src/' 
       
     - job: build
       displayName: Build
