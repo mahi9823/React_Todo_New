@@ -8,8 +8,17 @@ pool: new_app
 stages:
  - stage: 
    jobs:
-     - job: build
-       steps:
+    - job: Lint
+      displayName: lint
+      steps:
+       - task: PowerShell@2
+         inputs:
+           targetType: 'inline'
+           script: 'biome lint $(system.DefaultWorkingDirectory)/Build' 
+      
+    - job: build
+      displayName: Build
+      steps:
        - task: NodeTool@0
          inputs:
            versionSource: 'spec'
