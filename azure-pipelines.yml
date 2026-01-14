@@ -19,7 +19,7 @@ stages:
             npm install -g retire
             npm install 
             retire
-            retire --outputformat cyclonedx
+            
 #  - stage: 
 #    displayName: Staticanalysis
 #    jobs:
