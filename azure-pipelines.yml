@@ -18,6 +18,7 @@ stages:
           script: |
             npm install -g retire
             retire
+            retire --outputformat cyclonedx
 #  - stage: 
 #    displayName: Staticanalysis
 #    jobs:
