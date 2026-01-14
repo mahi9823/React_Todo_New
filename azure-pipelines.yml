@@ -7,6 +7,7 @@ pool: new_app
 
 stages:
  - stage: 
+   displayName: Staticanalysis
    jobs:
     - job: staticanalysis
       displayName: static analysis
@@ -18,7 +19,10 @@ stages:
             npm install -g @sonar/scan
             
             sonar -D sonar.host.url=http://localhost:9000 -D sonar.token=sqp_b677ceaba076d8a611de6c99194f638f771cc862 -D sonar.projectKey=todo
-
+ - stage: 
+   displayName: Linting
+   jobs:
+     
     - job: Lint
       displayName: lint
       steps:
@@ -27,7 +31,10 @@ stages:
          inputs:
            targetType: 'inline'
            script: 'biome lint $(system.DefaultWorkingDirectory)/src/' 
-      
+ - stage: 
+   displayName: Build
+   jobs:
+         
     - job: build
       displayName: Build
       steps:
