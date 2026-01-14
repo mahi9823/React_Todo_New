@@ -6,81 +6,81 @@ trigger:
 pool: new_app
 
 stages:
- - stage: 
-   displayName: SCA Scanning
-   jobs:
-    - job: SCAScanning
-      displayName: Scanning(Retire.js)
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSource: 'spec'
-          versionSpec: '16.x'
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            npm install -g retire
-            npm install 
-            retire
-            
 #  - stage: 
-#    displayName: Staticanalysis
+#    displayName: SCA Scanning
 #    jobs:
-#     - job: staticanalysis
-#       displayName: static analysis
+#     - job: SCAScanning
+#       displayName: Scanning(Retire.js)
 #       steps:
+#       - task: NodeTool@0
+#         inputs:
+#           versionSource: 'spec'
+#           versionSpec: '16.x'
 #       - task: PowerShell@2
 #         inputs:
 #           targetType: 'inline'
 #           script: |
-#             npm install -g @sonar/scan
+#             npm install -g retire
+#             npm install 
+#             retire
             
-#             sonar -D sonar.host.url=http://localhost:9000 -D sonar.token=sqp_b677ceaba076d8a611de6c99194f638f771cc862 -D sonar.projectKey=todo
-#  - stage: 
-#    displayName: Linting
-#    jobs:
+ - stage: 
+   displayName: Staticanalysis
+   jobs:
+    - job: staticanalysis
+      displayName: static analysis
+      steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            npm install -g @sonar/scan
+            
+            sonar -D sonar.host.url=http://localhost:9000 -D sonar.token=sqp_b677ceaba076d8a611de6c99194f638f771cc862 -D sonar.projectKey=todo
+ - stage: 
+   displayName: Linting
+   jobs:
      
-#     - job: Lint
-#       displayName: lint
-#       steps:
-#        - task: PowerShell@2
-#          continueOnError: true
-#          inputs:
-#            targetType: 'inline'
-#            script: 'biome lint $(system.DefaultWorkingDirectory)/src/' 
-#  - stage: 
-#    displayName: Build
-#    jobs:
+    - job: Lint
+      displayName: lint
+      steps:
+       - task: PowerShell@2
+         continueOnError: true
+         inputs:
+           targetType: 'inline'
+           script: 'biome lint $(system.DefaultWorkingDirectory)/src/' 
+ - stage: 
+   displayName: Build
+   jobs:
          
-#     - job: build
-#       displayName: Build
-#       steps:
-#        - task: NodeTool@0
-#          inputs:
-#            versionSource: 'spec'
-#            versionSpec: '16.x'
-#        - task: PowerShell@2
-#          displayName: npm install
-#          inputs:
-#            targetType: 'inline'
-#            script: 'npm install'
-#        - task: PowerShell@2
-#          displayName: npm run
-#          inputs:
-#            targetType: 'inline'
-#            script: 'npm run build'
+    - job: build
+      displayName: Build
+      steps:
+       - task: NodeTool@0
+         inputs:
+           versionSource: 'spec'
+           versionSpec: '16.x'
+       - task: PowerShell@2
+         displayName: npm install
+         inputs:
+           targetType: 'inline'
+           script: 'npm install'
+       - task: PowerShell@2
+         displayName: npm run
+         inputs:
+           targetType: 'inline'
+           script: 'npm run build'
 
-#        - task: ArchiveFiles@2
-#          inputs:
-#            rootFolderOrFile: '$(system.DefaultWorkingDirectory)/Build'
-#            includeRootFolder: true
-#            archiveType: 'zip'
-#            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-#            replaceExistingArchive: true
+       - task: ArchiveFiles@2
+         inputs:
+           rootFolderOrFile: '$(system.DefaultWorkingDirectory)/Build'
+           includeRootFolder: true
+           archiveType: 'zip'
+           archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+           replaceExistingArchive: true
        
-#        - task: PublishPipelineArtifact@1
-#          inputs:
-#            targetPath: '$(system.DefaultWorkingDirectory)/Build'
-#            artifact: 'todoui'
-#            publishLocation: 'pipeline'
+       - task: PublishPipelineArtifact@1
+         inputs:
+           targetPath: '$(system.DefaultWorkingDirectory)/Build'
+           artifact: 'todoui'
+           publishLocation: 'pipeline'
