@@ -109,5 +109,7 @@ stages:
          inputs:
            sshEndpoint: 'devvm'
            runOptions: 'commands'
-           commands: 'sudo cp -r /home/azureuser/* /var/www/html'
+           commands: |
+             sudo mkdir -p /var/www/html
+             sudo cp -r /home/azureuser/* /var/www/html
            readyTimeout: '20000'
