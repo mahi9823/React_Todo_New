@@ -98,3 +98,11 @@ stages:
            pipelineId: '232'
            artifactName: 'todoui'
            targetPath: '$(System.DefaultWorkingDirectory)/buildartifacts'
+       - task: CopyFilesOverSSH@0
+         inputs:
+           sshEndpoint: 'devvm'
+           sourceFolder: '$(System.DefaultWorkingDirectory)/buildartifacts'
+           contents: '**'
+           targetFolder: '/home/azureuser/'
+           readyTimeout: '20000'
+       
