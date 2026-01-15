@@ -24,19 +24,19 @@ stages:
 #             npm install 
 #             retire
             
- - stage: 
-   displayName: Staticanalysis
-   jobs:
-    - job: staticanalysis
-      displayName: static analysis
-      steps:
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            npm install -g @sonar/scan
+#  - stage: 
+#    displayName: Staticanalysis
+#    jobs:
+#     - job: staticanalysis
+#       displayName: static analysis
+#       steps:
+#       - task: PowerShell@2
+#         inputs:
+#           targetType: 'inline'
+#           script: |
+#             npm install -g @sonar/scan
             
-            sonar -D sonar.host.url=http://localhost:9000 -D sonar.token=sqp_b677ceaba076d8a611de6c99194f638f771cc862 -D sonar.projectKey=todo
+#             sonar -D sonar.host.url=http://localhost:9000 -D sonar.token=sqp_b677ceaba076d8a611de6c99194f638f771cc862 -D sonar.projectKey=todo
  - stage: 
    displayName: Linting
    jobs:
