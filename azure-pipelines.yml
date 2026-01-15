@@ -97,4 +97,4 @@ stages:
            buildVersionToDownload: 'specific'
            pipelineId: '232'
            artifactName: 'todoui'
-           targetPath: '$(System.DefaultWorkingDirectory)'
+           targetPath: '$(System.DefaultWorkingDirectory)/buildartifacts'
